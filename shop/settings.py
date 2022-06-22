@@ -208,3 +208,11 @@ SIMPLE_JWT = {
 
     'JTI_CLAIM': 'jti',   
 }
+
+
+# GRAPH_MODELS setting
+
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
