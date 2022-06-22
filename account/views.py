@@ -11,7 +11,7 @@ class CustomUserView(views.APIView):
     def post(self, request):
         data = request.data
         serialzier = CustomUserSerializer(data=data)
-        if serialzier.is_valid():
-            serialzier.save()
-            return Response(serialzier.data, status=status.HTTP_201_CREATED)
-        return Response(serialzier.error, status=status.HTTP_400_BAD_REQUEST)
+        serialzier.is_valid(raise_exception=True)
+        serialzier.save()
+        return Response(serialzier.data, status=status.HTTP_201_CREATED)
+        

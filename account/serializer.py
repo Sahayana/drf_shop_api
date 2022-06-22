@@ -37,6 +37,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
                 detail={"error": "올바른 휴대전화번호를 입력하세요"}, 
                 code=status.HTTP_400_BAD_REQUEST
             )
+        
+        return attrs
     
     
     def create(self, validated_data):
