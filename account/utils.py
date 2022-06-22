@@ -2,6 +2,7 @@
 
 
 def email_validator(email):
+
     lambdas = [
         lambda x: "@" in x,
         lambda x: "." in x,
@@ -28,3 +29,10 @@ def password_validator(password):
         if any([lam(x) for x in password]):
             return True
     return False
+
+
+def phone_validator(phone):
+    
+    if len(phone) == 11 and all([isinstance(int(num), int) for num in phone]):
+        return True
+    return False 
