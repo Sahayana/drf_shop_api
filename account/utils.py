@@ -25,10 +25,14 @@ def password_validator(password):
         lambda x: x in [str(i) for i in range(0, 9)]
     ]
 
+    is_valid = []
     for lam in lambdas:
         if any([lam(x) for x in password]):
-            return True
-    return False
+            is_valid.append(1)
+        else:
+            is_valid.append(0)
+
+    return all(is_valid)
 
 
 def phone_validator(phone):
