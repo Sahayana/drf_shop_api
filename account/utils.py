@@ -36,7 +36,10 @@ def password_validator(password):
 
 
 def phone_validator(phone):
-    
-    if len(phone) == 11 and all([isinstance(int(num), int) for num in phone]):
-        return True
-    return False 
+
+    try:    
+        if len(phone) == 11 and all([isinstance(int(num), int) for num in phone]):
+            return True
+    except ValueError:
+        return False
+    return False
