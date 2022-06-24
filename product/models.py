@@ -7,25 +7,40 @@ class Category(models.Model):
     
     name        =   models.CharField(max_length= 50)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Color(models.Model):
 
     name        =   models.CharField(max_length= 50)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Featrue(models.Model):
 
     name        =   models.CharField(max_length= 500)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Size(models.Model):
 
     name        =   models.CharField(max_length= 50)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Image(models.Model):
 
-    name        =   models.CharField(max_length= 500)
+    image        =   models.CharField(max_length= 500)
+
+    def __str__(self) -> str:
+        return self.image
 
 
 class Information(models.Model):
@@ -42,12 +57,17 @@ class Detail(models.Model):
     information =   models.ForeignKey(Information, on_delete= models.SET_NULL, null= True)
     is_main     =   models.BooleanField(default=False)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Product(models.Model):
 
     detail      =   models.ForeignKey(Detail, on_delete= models.SET_NULL, null= True)
     price       =   models.DecimalField(max_digits= 10, decimal_places= 2)
 
+    def __str__(self) -> str:
+        return self.detail.name
 
 class ProductColor(models.Model):
 
