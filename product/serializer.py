@@ -17,76 +17,84 @@ from product.models import (
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Category
+        model  = Category
         fields = ["name"]
 
 
 class ColorSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Color
+        model  = Color
         fields = ["name"]
 
 
 class FeatrueSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Feature
+        model  = Feature
         fields = ["feature"]
 
 
 class SizeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Size
+        model  = Size
         fields = ["name"]
 
 
 class ImageSerialzier(serializers.ModelSerializer):
 
     class Meta:
-        model = Image
+        model  = Image
         fields = ["image"]
         
 
 class InformationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Information
-        fields = "__all__"
+        model   = Information
+        exclude = ["id"]
 
 
 class DetailSerializer(serializers.ModelSerializer):
 
-    feature     = FeatrueSerializer(read_only= True)
+    feature     = serializers.StringRelatedField(read_only= True)
     information = InformationSerializer(read_only= True)
 
     class Meta:
-        model = Detail
-        fields = "__all__"
+        model   = Detail
+        exclude = ["id"]
 
 
 class ProductSerializer(serializers.ModelSerializer):
 
     category    = serializers.StringRelatedField(read_only= True)
     detail      = DetailSerializer(read_only= True)
-    color       = ColorSerializer(many= True, read_only= True)
+    color_list  = serializers.SerializerMethodField(read_only= True)
 
     class Meta:
-        model = Product
-        fields = "__all__"
+        model   = Product
+        exclude = ["id", "color"]
+    
+    def get_color_list(self, obj):
+        return [color.name for color in obj.color.all()]
+
 
 
 class ProductColorSerializer(serializers.ModelSerializer):
 
     product = ProductSerializer(read_only= True)
-    color   = ColorSerializer(read_only= True)
-    image   = serializers.StringRelatedField(read_only= True)
-    size    = SizeSerializer(many= True, read_only= True)
+    color   = serializers.StringRelatedField(read_only= True)
+    image   = serializers.StringRelatedField(read_only= True)    
+    size    = serializers.SerializerMethodField(read_only= True)
 
     class Meta:
         model = ProductColor
-        fields = "__all__"
+        fields = "__all__"        
+
+    def get_size(self, obj):
+        return [size.name for size in obj.size.all()]
+    
 
 
 class ProductColorSizeSerializer(serializers.ModelSerializer):
