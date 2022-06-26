@@ -86,6 +86,9 @@ class ProductColor(models.Model):
             models.UniqueConstraint(fields=["product", "color"], name="unique_product_color"),
         ]
 
+    def __str__(self) -> str:
+        return f"{self.product.detail.name}/ Color: {self.color.name}"
+
 
 class ProductColorSize(models.Model):
 
@@ -98,3 +101,7 @@ class ProductColorSize(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["product_color", "size"], name="unique_product_color_size"),
         ]
+
+    
+    def __str__(self) -> str:
+        return f"{self.product_color.product.detail.name}/ Color: {self.product_color.color.name}/ Size: {self.size.name}"
