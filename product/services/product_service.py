@@ -27,7 +27,7 @@ def get_main_products(offset: int, limit: int):
             "color",
             "image"
         ).filter(product__detail__is_main= True).prefetch_related("size").all()
-        [offset: offset * limit]        
+        [offset: offset + limit]        
     )
 
 
@@ -42,5 +42,5 @@ def get_category_products(category: str, offset: int, limit: int):
             "color",
             "image"
         ).filter(product__category__name__in= [category]).prefetch_related("size").all()
-        [offset: offset * limit]
+        [offset: offset + limit]
     )

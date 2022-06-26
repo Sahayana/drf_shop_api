@@ -17,7 +17,7 @@ class MainProductView(APIView):
     
     def get(self, request, offset= 0, limit= 10):
         products = get_main_products(offset=offset, limit=limit)
-        data = ProductColorSerializer(data=products, many=True).data
+        data = ProductColorSerializer(products, many=True).data
         return Response(data=data, status=status.HTTP_200_OK)
 
 
@@ -26,7 +26,7 @@ class CategoryProductView(APIView):
 
     def get(self, request, category, offset=0, limit=10):
         products = get_category_products(category=category, offset=offset, limit=limit)
-        data = ProductColorSerializer(data=products, many=True).data
+        data = ProductColorSerializer(products, many=True).data
         return Response(data=data, status=status.HTTP_200_OK)
 
 
@@ -35,5 +35,5 @@ class ProductDetailView(APIView):
 
     def get(self, request, product_id):
         product = get_single_product(product_id=product_id)
-        data = ProductColorSerializer(data=product).data
+        data = ProductColorSerializer(product).data
         return Response(data=data, status=status.HTTP_200_OK)
