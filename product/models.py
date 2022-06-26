@@ -19,7 +19,7 @@ class Color(models.Model):
         return self.name
 
 
-class Featrue(models.Model):
+class Feature(models.Model):
 
     feature        =   models.CharField(max_length= 500)
 
@@ -53,7 +53,7 @@ class Information(models.Model):
 class Detail(models.Model):
 
     name        =   models.CharField(max_length=100)
-    feature     =   models.ForeignKey(Featrue, on_delete= models.SET_NULL, null= True)
+    feature     =   models.ForeignKey(Feature, on_delete= models.SET_NULL, null= True)
     information =   models.ForeignKey(Information, on_delete= models.SET_NULL, null= True)
     is_main     =   models.BooleanField(default=False)
 
