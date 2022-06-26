@@ -41,6 +41,14 @@ class SizeSerializer(serializers.ModelSerializer):
         models = Size
         fields = ["name"]
 
+
+class ImageSerialzier(serializers.ModelSerializer):
+
+    class Meta:
+        models = Image
+        fields = ["image"]
+        
+
 class InformationSerializer(serializers.ModelSerializer):
 
     class Meta:
