@@ -17,42 +17,42 @@ from product.models import (
 class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
-        models = Category
+        model = Category
         fields = ["name"]
 
 
 class ColorSerializer(serializers.ModelSerializer):
 
     class Meta:
-        models = Color
+        model = Color
         fields = ["name"]
 
 
 class FeatrueSerializer(serializers.ModelSerializer):
 
     class Meta:
-        models = Feature
+        model = Feature
         fields = ["feature"]
 
 
 class SizeSerializer(serializers.ModelSerializer):
 
     class Meta:
-        models = Size
+        model = Size
         fields = ["name"]
 
 
 class ImageSerialzier(serializers.ModelSerializer):
 
     class Meta:
-        models = Image
+        model = Image
         fields = ["image"]
         
 
 class InformationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        models = Information
+        model = Information
         fields = "__all__"
 
 
@@ -62,17 +62,18 @@ class DetailSerializer(serializers.ModelSerializer):
     information = InformationSerializer(read_only= True)
 
     class Meta:
-        models = Detail
+        model = Detail
         fields = "__all__"
 
 
 class ProductSerializer(serializers.ModelSerializer):
 
-    detail  = DetailSerializer(read_only= True)
-    color   = ColorSerializer(many= True, read_only= True)
+    category    = serializers.StringRelatedField(read_only= True)
+    detail      = DetailSerializer(read_only= True)
+    color       = ColorSerializer(many= True, read_only= True)
 
     class Meta:
-        models = Product
+        model = Product
         fields = "__all__"
 
 
@@ -84,7 +85,7 @@ class ProductColorSerializer(serializers.ModelSerializer):
     size    = SizeSerializer(many= True, read_only= True)
 
     class Meta:
-        models = ProductColor
+        model = ProductColor
         fields = "__all__"
 
 
@@ -94,5 +95,5 @@ class ProductColorSizeSerializer(serializers.ModelSerializer):
     size          = SizeSerializer(read_only= True)
 
     class Meta:
-        models = ProductColorSize
+        model = ProductColorSize
         fields = "__all__"
