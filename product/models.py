@@ -21,7 +21,7 @@ class Color(models.Model):
 
 class Featrue(models.Model):
 
-    name        =   models.CharField(max_length= 500)
+    feature        =   models.CharField(max_length= 500)
 
     def __str__(self) -> str:
         return self.name
