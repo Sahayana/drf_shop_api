@@ -24,7 +24,7 @@ class Feature(models.Model):
     feature        =   models.CharField(max_length= 500)
 
     def __str__(self) -> str:
-        return self.name
+        return self.feature
 
 
 class Size(models.Model):
@@ -48,6 +48,9 @@ class Information(models.Model):
     origin      =   models.CharField(max_length= 50)
     composition =   models.CharField(max_length= 150, null= True, blank= True)
     fit         =   models.CharField(max_length= 150, null= True, blank= True)
+
+    def __str__(self) -> str:
+        return self.composition
 
 
 class Detail(models.Model):
@@ -78,9 +81,20 @@ class ProductColor(models.Model):
     image       =   models.OneToOneField(Image, on_delete= models.SET_NULL, null= True)
     size        =   models.ManyToManyField(Size, through= "ProductColorSize")
     
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["product", "color"], name="unique_product_color"),
+        ]
+
 
 class ProductColorSize(models.Model):
 
     product_color   =   models.ForeignKey(ProductColor, on_delete= models.SET_NULL, null= True)
     size            =   models.ForeignKey(Size, on_delete= models.SET_NULL, null= True)
     quantity        =   models.IntegerField()
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=["product_color", "size"], name="unique_product_color_size"),
+        ]
