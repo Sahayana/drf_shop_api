@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.db import models
 
 # Create your models here.
@@ -66,6 +67,7 @@ class Detail(models.Model):
 
 class Product(models.Model):
 
+    category    =   models.ForeignKey(Category, on_delete= models.SET_NULL, null= True)
     detail      =   models.ForeignKey(Detail, on_delete= models.SET_NULL, null= True)
     price       =   models.DecimalField(max_digits= 10, decimal_places= 2)
     color       =   models.ManyToManyField(Color, through= "ProductColor")
@@ -75,7 +77,7 @@ class Product(models.Model):
 
 
 class ProductColor(models.Model):
-
+    
     product     =   models.ForeignKey(Product, on_delete= models.SET_NULL, null= True)
     color       =   models.ForeignKey(Color, on_delete= models.SET_NULL, null= True)
     image       =   models.OneToOneField(Image, on_delete= models.SET_NULL, null= True)
