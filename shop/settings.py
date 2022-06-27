@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "account",
     "product",
     "order",
+    "like",
 
     # drf
     "rest_framework",
