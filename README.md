@@ -21,7 +21,7 @@ All product information have been sourced from https://www.alyxstudio.com/ , one
   * ProductColorSize
 
 * **Like**
-  * *Will build out soon
+  * ProductLike
 
 * **Order**
   * *Will build out soon
